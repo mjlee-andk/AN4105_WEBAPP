@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>신우강업 계량 조회 시스템</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <h3>신우강업 계량 조회 시스템</h3>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="msgForm">Command: </label>
+        <input type="text" class="form-control" id="msgForm">
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <div id="chatLogs"></div>
+    <h3>device1</h3>
+    <span id="device1_value"></span>
+    <span id="device1_unit"></span>
+    <h3>device2</h3>
+    <div id="device2"></div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+  $(function(){
+    // socket.io 서버에 접속한다
+    var socket = io();
+
+    // 서버로부터의 메시지가 수신되면
+    socket.on("device1", function(data) {
+        console.log('device1 ' + data);
+        $("#device1_value").text(data.value);
+        $("#device1_unit").text(data.unit);
+    });
+    socket.on("device2", function(data) {
+        console.log('device2 ' + data);
+        $("#device2").text(data);
+    });
+
+    setInterval(function(){
+        socket.emit("getSerialData", { });
+    }, 1000);
+
+    // Send 버튼이 클릭되면
+    $("form").submit(function(e) {
+      e.preventDefault();
+      var $msgForm = $("#msgForm");
+      console.log($msgForm.val());
+      // 서버로 메시지를 전송한다.
+      socket.emit("command", { cmd: $msgForm.val() });
+      $msgForm.val("");
+    });
+  });
+  </script>
+</body>
+</html>
