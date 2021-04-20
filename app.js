@@ -146,7 +146,7 @@ var isCommand = function(data) {
         return true;
     }
     var curStatus = arr[0];
-    if(curStatus.search('QT') > 0 || curStatus.search('WT') > 0) {
+    if(curStatus.search('QT') > 0 || curStatus.search('WT') > 0 || curStatus.search('US') > 0) {
         return false;
     }
     return true;
