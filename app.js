@@ -18,7 +18,10 @@ app.get('/', function(req, res) {
 io.on('connection', function(socket) {
     socket.on('getSerialData', function(){
         connection.setEncoding('utf8');
-        connection.write('@99RW\r\n');
+        connection.write('@01RW\r\n');
+        setTimeout(function(){
+            connection.write('@10RW\r\n');
+        }, 500)
     })
     // 명령어 입력
     socket.on('command', function(data){
@@ -50,10 +53,14 @@ connection.on('data', function(serialData){
         unit: ''
     }
 
+    // if(!isStable(serialData)) {
+    //     return;
+    // }
+
     // 커맨드 응답인지 여부 확인
     if(isCommand(serialData)) {
         result.value = serialData;
-        io.emit('device1', result);
+        showResult(result, getDeviceNum(serialData));
         return;
     }
 
@@ -66,8 +73,40 @@ connection.on('data', function(serialData){
     // 숫자값
     result.value = getValue(serialData);
 
-    io.emit('device1', result);
+    showResult(result, getDeviceNum(serialData));
+    // io.emit('device1', result);
 })
+
+var showResult = function(result, deviceNum) {
+    // 테스트 코드
+    if(deviceNum == '01') {
+        io.emit('device01', result);
+        return;
+    }
+
+    if(deviceNum == '10') {
+        io.emit('device10', result);
+        return;
+    }
+
+    // 정석코드
+    io.emit('device'+ deviceNum, result);
+}
+
+// 장치 번호 확인하는 함수
+var getDeviceNum = function(data) {
+    if(data == '' || data == null) {
+        return '';
+    }
+
+    var deviceNum = data.substring(0,3);
+    if(deviceNum == '' || deviceNum == null) {
+        return '';
+    }
+    var result = deviceNum.replace('@', '');
+
+    return result;
+}
 
 // 개수 단위인지 확인하는 함수
 // PC - 개수
@@ -77,6 +116,21 @@ var isCount = function(data) {
         return true;
     }
     return false;
+}
+
+// 안정,불안정 판정하는 함수
+var isStable = function(data) {
+    var arr = data.split(',');
+    if(arr.length < 2) {
+        return false;
+    }
+
+    var curStatus = arr[0];
+    if(curStatus.search('US') > 0) {
+        return false;
+    }
+
+    return true;
 }
 
 // 커맨드 명령어에 대한 답인지 아닌지 판단하는 함수

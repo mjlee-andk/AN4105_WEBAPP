@@ -14,46 +14,170 @@
         <input type="text" class="form-control" id="msgForm">
       </div>
       <button type="submit" class="btn btn-primary">Send</button>
+      <button id="start" class="btn btn-success">Start</button>
+      <button id="stop" class="btn btn-danger">Stop</button>
     </form>
     <div id="chatLogs"></div>
-    <h3>device1</h3>
-    <span id="device1_value"></span>
-    <span id="device1_unit"></span>
-    <h3>device2</h3>
-    <div id="device2"></div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 1 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device1_value"></span>
+                <span id="device1_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 2 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device2_value"></span>
+                <span id="device2_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 3 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device3_value"></span>
+                <span id="device3_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 4 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device4_value"></span>
+                <span id="device4_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 5 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device5_value"></span>
+                <span id="device5_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 6 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device6_value"></span>
+                <span id="device6_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 7 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device7_value"></span>
+                <span id="device7_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 8 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device8_value"></span>
+                <span id="device8_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 9 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device9_value"></span>
+                <span id="device9_unit"></span>
+            </h1>
+        </div>
+    </div>
+    <div>
+        <div style="display:inline-block">
+            <h3>device 10 : </h3>
+        </div>
+        <div style="display:inline-block">
+            <h1>
+                <span id="device10_value"></span>
+                <span id="device10_unit"></span>
+            </h1>
+        </div>
+    </div>
+
+
+
+
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-  $(function(){
-    // socket.io 서버에 접속한다
-    var socket = io();
+      $(function(){
+        // socket.io 서버에 접속한다
+        var socket = io();
+        var isPaused = true;
 
-    // 서버로부터의 메시지가 수신되면
-    socket.on("device1", function(data) {
-        console.log('device1 ' + data);
-        $("#device1_value").text(data.value);
-        $("#device1_unit").text(data.unit);
-    });
-    socket.on("device2", function(data) {
-        console.log('device2 ' + data);
-        $("#device2").text(data);
-    });
+        // 서버로부터의 메시지가 수신되면
+        socket.on("device01", function(data) {
+            console.log('device1 ' + data);
+            $("#device1_value").text(data.value);
+            $("#device1_unit").text(data.unit);
+        });
+        socket.on("device10", function(data) {
+            console.log('device10 ' + data);
+            $("#device10_value").text(data.value);
+            $("#device10_unit").text(data.unit);
+        });
 
-    setInterval(function(){
-        socket.emit("getSerialData", { });
-    }, 1000);
+        setInterval(function(){
+            if(!isPaused) {
+                socket.emit("getSerialData", { });
+            }
+        }, 1000);
 
-    // Send 버튼이 클릭되면
-    $("form").submit(function(e) {
-      e.preventDefault();
-      var $msgForm = $("#msgForm");
-      console.log($msgForm.val());
-      // 서버로 메시지를 전송한다.
-      socket.emit("command", { cmd: $msgForm.val() });
-      $msgForm.val("");
-    });
-  });
+        $('#start').click(function(e){
+            e.preventDefault();
+            isPaused = false;
+        });
+
+        $('#stop').click(function(e){
+            e.preventDefault();
+            isPaused = true;
+        });
+
+        // Send 버튼이 클릭되면
+        $("form").submit(function(e) {
+          e.preventDefault();
+          var $msgForm = $("#msgForm");
+          // 서버로 메시지를 전송한다.
+          socket.emit("command", { cmd: $msgForm.val() });
+          $msgForm.val("");
+        });
+      });
   </script>
 </body>
 </html>
