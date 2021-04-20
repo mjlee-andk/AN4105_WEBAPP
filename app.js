@@ -1,4 +1,7 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
+var path = require('path');
+
 var server = require('http').createServer(app);
 // http server를 socket.io server로 upgrade한다
 var io = require('socket.io')(server);
@@ -6,6 +9,7 @@ var io = require('socket.io')(server);
 const net = require('net')
 const connection = net.connect({
     port: 8899,
+    // host: '10.10.100.254'
     host: '192.168.10.40'
 })
 
@@ -14,6 +18,8 @@ const connection = net.connect({
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
+
+app.use('/node_modules', express.static(path.join(__dirname, '/node_modules')));
 
 io.on('connection', function(socket) {
     socket.on('getSerialData', function(){
