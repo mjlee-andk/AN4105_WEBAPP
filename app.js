@@ -13,7 +13,6 @@ const connection = net.connect({
     host: '192.168.10.40'
 })
 
-
 // localhost:3000으로 서버에 접속하면 클라이언트로 index.html을 전송한다
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
