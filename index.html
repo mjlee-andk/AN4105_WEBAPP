@@ -1,184 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>신우강업 계량 조회 시스템</title>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>신우강업 계량 조회 시스템</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <h3>신우강업 계량 조회 시스템</h3>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="msgForm">Command: </label>
-        <input type="text" class="form-control" id="msgForm">
-      </div>
-      <button type="submit" class="btn btn-primary">Send</button>
-      <button id="start" class="btn btn-success">Start</button>
-      <button id="stop" class="btn btn-danger">Stop</button>
-    </form>
-    <div id="chatLogs"></div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 1 : </h3>
+    <div class="container">
+        <h3>신우강업 계량 조회 시스템</h3>
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="msgForm">Command: </label>
+                <input type="text" class="form-control" id="msgForm">
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+            <button id="start" class="btn btn-success">Start</button>
+            <button id="stop" class="btn btn-danger">Stop</button>
+        </form>
+        <div id="chatLogs"></div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 1 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device1_value"></span>
+                    <span id="device1_unit"></span>
+                </h1>
+            </div>
         </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device1_value"></span>
-                <span id="device1_unit"></span>
-            </h1>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 2 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device2_value"></span>
+                    <span id="device2_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 3 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device3_value"></span>
+                    <span id="device3_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 4 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device4_value"></span>
+                    <span id="device4_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 5 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device5_value"></span>
+                    <span id="device5_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 6 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device6_value"></span>
+                    <span id="device6_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 7 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device7_value"></span>
+                    <span id="device7_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 8 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device8_value"></span>
+                    <span id="device8_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 9 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device9_value"></span>
+                    <span id="device9_unit"></span>
+                </h1>
+            </div>
+        </div>
+        <div>
+            <div style="display:inline-block">
+                <h3>device 10 : </h3>
+            </div>
+            <div style="display:inline-block">
+                <h1>
+                    <span id="device10_value"></span>
+                    <span id="device10_unit"></span>
+                </h1>
+            </div>
         </div>
     </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 2 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device2_value"></span>
-                <span id="device2_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 3 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device3_value"></span>
-                <span id="device3_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 4 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device4_value"></span>
-                <span id="device4_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 5 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device5_value"></span>
-                <span id="device5_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 6 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device6_value"></span>
-                <span id="device6_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 7 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device7_value"></span>
-                <span id="device7_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 8 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device8_value"></span>
-                <span id="device8_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 9 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device9_value"></span>
-                <span id="device9_unit"></span>
-            </h1>
-        </div>
-    </div>
-    <div>
-        <div style="display:inline-block">
-            <h3>device 10 : </h3>
-        </div>
-        <div style="display:inline-block">
-            <h1>
-                <span id="device10_value"></span>
-                <span id="device10_unit"></span>
-            </h1>
-        </div>
-    </div>
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function(){
+            // socket.io 서버에 접속한다
+            var socket = io();
+            var isPaused = true;
 
+            // 서버로부터의 메시지가 수신되면
+            socket.on("device01", function(data) {
+                console.log('device1 ' + data);
+                $("#device1_value").text(data.value);
+                $("#device1_unit").text(data.unit);
+            });
+            socket.on("device10", function(data) {
+                console.log('device10 ' + data);
+                $("#device10_value").text(data.value);
+                $("#device10_unit").text(data.unit);
+            });
 
-
-
-  </div>
-  <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-      $(function(){
-        // socket.io 서버에 접속한다
-        var socket = io();
-        var isPaused = true;
-
-        // 서버로부터의 메시지가 수신되면
-        socket.on("device01", function(data) {
-            console.log('device1 ' + data);
-            $("#device1_value").text(data.value);
-            $("#device1_unit").text(data.unit);
-        });
-        socket.on("device10", function(data) {
-            console.log('device10 ' + data);
-            $("#device10_value").text(data.value);
-            $("#device10_unit").text(data.unit);
-        });
-
-        setInterval(function(){
-            if(!isPaused) {
+            setInterval(function(){
+                if(!isPaused) {
                 socket.emit("getSerialData", { });
-            }
-        }, 1000);
+                }
+            }, 1000);
 
-        $('#start').click(function(e){
-            e.preventDefault();
-            isPaused = false;
-        });
+            $('#start').click(function(e){
+                e.preventDefault();
+                isPaused = false;
+            });
 
-        $('#stop').click(function(e){
-            e.preventDefault();
-            isPaused = true;
-        });
+            $('#stop').click(function(e){
+                e.preventDefault();
+                isPaused = true;
+            });
 
-        // Send 버튼이 클릭되면
-        $("form").submit(function(e) {
-          e.preventDefault();
-          var $msgForm = $("#msgForm");
-          // 서버로 메시지를 전송한다.
-          socket.emit("command", { cmd: $msgForm.val() });
-          $msgForm.val("");
+            // Send 버튼이 클릭되면
+            $("form").submit(function(e) {
+                e.preventDefault();
+                var $msgForm = $("#msgForm");
+                // 서버로 메시지를 전송한다.
+                socket.emit("command", { cmd: $msgForm.val() });
+                $msgForm.val("");
+            });
         });
-      });
-  </script>
+    </script>
 </body>
 </html>
